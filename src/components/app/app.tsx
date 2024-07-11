@@ -14,8 +14,13 @@ import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+
+import { useDispatch } from '../../services/store';
+import { getIngredients } from '../../services/ingredients';
 
 const App = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const background = location.state?.background;
@@ -23,6 +28,10 @@ const App = () => {
     // закрываем модальное окно и возвращаемся обратно
     navigate(-1);
   };
+
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, []);
 
   return (
     <div className={styles.app}>
