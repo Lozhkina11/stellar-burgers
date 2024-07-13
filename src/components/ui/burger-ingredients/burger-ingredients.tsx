@@ -3,7 +3,8 @@ import { Tab } from '@zlden/react-developer-burger-ui-components';
 
 import styles from './burger-ingredients.module.css';
 import { BurgerIngredientsUIProps } from './type';
-import { IngredientsCategory } from '@components';
+import { IngredientDetails, IngredientsCategory, Modal } from '@components';
+import { Router, useNavigate } from 'react-router-dom';
 
 export const BurgerIngredientsUI: FC<BurgerIngredientsUIProps> = memo(
   ({
@@ -14,6 +15,8 @@ export const BurgerIngredientsUI: FC<BurgerIngredientsUIProps> = memo(
     titleBunRef,
     titleMainRef,
     titleSaucesRef,
+    // activeIngredientId,
+    // setActiveIngredientId,
     bunsRef,
     mainsRef,
     saucesRef,
@@ -48,21 +51,29 @@ export const BurgerIngredientsUI: FC<BurgerIngredientsUIProps> = memo(
             titleRef={titleBunRef}
             ingredients={buns}
             ref={bunsRef}
+            // setActiveIngredientId={setActiveIngredientId}
           />
           <IngredientsCategory
             title='Начинки'
             titleRef={titleMainRef}
             ingredients={mains}
             ref={mainsRef}
+            // setActiveIngredientId={setActiveIngredientId}
           />
           <IngredientsCategory
             title='Соусы'
             titleRef={titleSaucesRef}
             ingredients={sauces}
             ref={saucesRef}
+            // setActiveIngredientId={setActiveIngredientId}
           />
         </div>
       </section>
+      {/* {!!activeIngredientId && (
+        <Modal title='Детали ингредиента' onClose={() => {}}>
+          <IngredientDetails id={activeIngredientId} />
+        </Modal>
+      )} */}
     </>
   )
 );

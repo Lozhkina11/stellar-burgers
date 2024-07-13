@@ -6,10 +6,23 @@ import {
   useSelector as selectorHook
 } from 'react-redux';
 import { ingredientsReducer } from './ingredients';
+import { orderBurgerReducer } from './orderBurger';
+import { constructorReducer } from './ingredientsConstructor';
+import { orderReducer } from './order';
+import { userReducer } from './user';
+
+import { feedReducer } from './feed';
+import { userHistorysReducer } from './userHistory';
 
 const rootReducer = combineReducers({
-  ingredients: ingredientsReducer
-}); // Заменить на импорт настоящего редьюсера
+  ingredients: ingredientsReducer,
+  ingredientsConstructor: constructorReducer,
+  orderBurger: orderBurgerReducer,
+  order: orderReducer,
+  user: userReducer,
+  userHistory: userHistorysReducer,
+  feed: feedReducer
+});
 
 const store = configureStore({
   reducer: rootReducer,

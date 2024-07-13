@@ -22,10 +22,11 @@ export const BurgerIngredients: FC = () => {
   // const buns = [];
   // const mains = [];
   // const sauces = [];
+  // const [activeIngredientIdOld, setActiveIngredientId] = useState<string>('');
 
-  const ingredients: TIngredient[] = useSelector(
-    (store) => store.ingredients.ingredients
-  );
+  // const { id: activeIngredientId = '' } = useParams();
+
+  const ingredients: TIngredient[] = useSelector(selectIngredients);
 
   const buns: TIngredient[] = getAllIngredients(ingredients, 'bun');
   const mains: TIngredient[] = getAllIngredients(ingredients, 'main');
@@ -72,6 +73,8 @@ export const BurgerIngredients: FC = () => {
 
   return (
     <BurgerIngredientsUI
+      // activeIngredientId={activeIngredientId}
+      // setActiveIngredientId={setActiveIngredientId}
       currentTab={currentTab}
       buns={buns}
       mains={mains}

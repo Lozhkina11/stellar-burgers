@@ -19,11 +19,13 @@ import { useEffect } from 'react';
 import { useDispatch } from '../../services/store';
 import { getIngredients } from '../../services/ingredients';
 
+import { checkAuth } from '../../services/user';
+import { ProtectedRoutes } from '../protected-route/protected-route';
+
 const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const background = location.state?.background;
   const closeModal = (): void => {
     // закрываем модальное окно и возвращаемся обратно
     navigate(-1);
@@ -31,34 +33,78 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getIngredients());
+    dispatch(checkAuth());
   }, []);
 
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Routes location={background || location}>
+      <Routes location={location}>
         <Route path='/' element={<ConstructorPage />} />
+        <Route
+          path='/ingredients/:id'
+          element={
+            <Modal title='Детали ингредиента' onClose={closeModal}>
+              <IngredientDetails />
+            </Modal>
+          }
+        />
         <Route path='/feed' element={<Feed />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
-        <Route path='/reset-password' element={<ResetPassword />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/profile/orders' element={<ProfileOrders />} />
+        <Route
+          path='/login'
+          element={
+            <ProtectedRoutes guest>
+              <Login />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path='/register'
+          element={
+            <ProtectedRoutes guest>
+              <Register />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path='/forgot-password'
+          element={
+            <ProtectedRoutes guest>
+              <ForgotPassword />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path='/reset-password'
+          element={
+            <ProtectedRoutes guest>
+              <ResetPassword />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          // index
+          path='/profile'
+          element={
+            <ProtectedRoutes>
+              <Profile />
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path='/profile/orders'
+          element={
+            <ProtectedRoutes>
+              <ProfileOrders />
+            </ProtectedRoutes>
+          }
+        />
         <Route path='*' element={<NotFound404 />} />
         <Route
           path='/feed/:number'
           element={
             <Modal title='' onClose={closeModal}>
               <OrderInfo />
-            </Modal>
-          }
-        />
-        <Route
-          path='/ingredients/:id'
-          element={
-            <Modal title='Детали ингредиента' onClose={closeModal}>
-              <IngredientDetails />
             </Modal>
           }
         />
