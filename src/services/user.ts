@@ -55,8 +55,8 @@ export const updateUser = createAsyncThunk('user/updateUser', updateUserApi);
 
 export const logout = createAsyncThunk('user/logout', logoutApi);
 
-export const checkAuth = createAsyncThunk(
-  'user/checkAuth',
+export const checkLogin = createAsyncThunk(
+  'user/checkLogin',
   async (_, { dispatch }) => {
     const accessToken = getCookie('accessToken');
     if (accessToken) {

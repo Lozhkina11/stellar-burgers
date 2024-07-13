@@ -4,8 +4,8 @@ import { TIngredient } from '@utils-types';
 import { IngredientsCategoryUI } from '../ui/ingredients-category';
 import { useSelector } from '../../services/store';
 import {
-  selectSelectedBun,
-  selectSelectedIngredients
+  selectChoosingBun,
+  selectChoosingIngredients
 } from '../../services/ingredientsConstructor';
 
 export const IngredientsCategory = forwardRef<
@@ -21,8 +21,8 @@ export const IngredientsCategory = forwardRef<
   //   ingredients: []
   // };
 
-  const selectedIngredients = useSelector(selectSelectedIngredients);
-  const selectBun = useSelector(selectSelectedBun);
+  const selectedIngredients = useSelector(selectChoosingIngredients);
+  const selectBun = useSelector(selectChoosingBun);
 
   const burgerConstructor = {
     bun: selectBun,

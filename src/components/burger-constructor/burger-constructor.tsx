@@ -10,38 +10,24 @@ import {
 import { useDispatch, useSelector } from '../../services/store';
 import {
   resetConstructor,
-  selectSelectedBun,
-  selectSelectedIngredients
+  selectChoosingBun,
+  selectChoosingIngredients
 } from '../../services/ingredientsConstructor';
 import { useNavigate } from 'react-router-dom';
 import { selectUser } from '../../services/user';
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
-  // const constructorItems = {
-  //   bun: {
-  //     price: 0
-  //   },
-  //   ingredients: []
-  // };
-
-  // const orderRequest = false;
-
-  // const orderModalData = null;
-
   const dispatch = useDispatch();
   const navigator = useNavigate();
 
-  const selectedBun = useSelector(selectSelectedBun);
-  const selectedIngredients = useSelector(selectSelectedIngredients);
-
+  const selectedBun = useSelector(selectChoosingBun);
+  const selectedIngredients = useSelector(selectChoosingIngredients);
   const user = useSelector(selectUser);
-
   const constructorItems = {
     bun: selectedBun,
     ingredients: selectedIngredients
   };
-
   const orderRequest = useSelector(selectOrderBurgerIsLoading);
   const orderModalData = useSelector(selectOrderBurger);
   console.log({ orderModalData });
@@ -64,13 +50,11 @@ export const BurgerConstructor: FC = () => {
     });
   };
 
-  // const closeOrderModal = () => {};
   const closeOrderModal = () => {
-    dispatch(resetOrder());
-    navigator('/');
+    dispatch(resetOrder()); //сброс заказа
+    navigator('/'); // переход на главную страницу
   };
 
-  // TODO: было
   const price = useMemo(
     () =>
       (constructorItems.bun ? constructorItems.bun.price * 2 : 0) +

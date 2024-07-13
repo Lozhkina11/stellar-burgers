@@ -6,7 +6,7 @@ import { TBurgerIngredientProps } from './type';
 import { useDispatch } from '../../services/store';
 import {
   addBun,
-  addSelectedIngredient
+  addChoosingIngredient
 } from '../../services/ingredientsConstructor';
 
 export const BurgerIngredient: FC<TBurgerIngredientProps> = memo(
@@ -18,7 +18,7 @@ export const BurgerIngredient: FC<TBurgerIngredientProps> = memo(
       if (ingredient.type === 'bun') {
         dispatch(addBun(ingredient));
       } else {
-        dispatch(addSelectedIngredient(ingredient));
+        dispatch(addChoosingIngredient(ingredient));
       }
     };
 

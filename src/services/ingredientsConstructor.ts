@@ -1,30 +1,27 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TIngredient } from '@utils-types';
 
-type TInitialState = {
+type TBurgerState = {
   bun: TConstructorIngredient | null;
-  selectedIngredients: TConstructorIngredient[];
+  ingredients: TConstructorIngredient[];
 };
 
-const initialState: TInitialState = {
+const initialState: TBurgerState = {
   bun: null,
-  selectedIngredients: []
+  ingredients: []
 };
 
 const constructorSlice = createSlice({
   name: 'ingredientsConstructor',
   initialState: initialState,
   selectors: {
-    selectSelectedIngredients: (state) => state.selectedIngredients,
-    selectSelectedBun: (state) => state.bun
+    selectChoosingIngredients: (state) => state.ingredients,
+    selectChoosingBun: (state) => state.bun
   },
   reducers: {
-    addSelectedIngredient: {
+    addChoosingIngredient: {
       reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
-        state.selectedIngredients = [
-          ...state.selectedIngredients,
-          action.payload
-        ];
+        state.ingredients = [...state.ingredients, action.payload];
       },
       prepare: (ingredient: TIngredient) => {
         const id = nanoid();
@@ -40,42 +37,42 @@ const constructorSlice = createSlice({
     addBun: (state, action) => {
       state.bun = action.payload;
     },
-    removeSelectedIngredient: (
+    removeIngredient: (
       state,
       action: PayloadAction<TConstructorIngredient>
     ) => {
-      state.selectedIngredients = state.selectedIngredients.filter(
+      state.ingredients = state.ingredients.filter(
         (item) => item.id !== action.payload.id
       );
     },
     resetConstructor: (state) => {
       state.bun = null;
-      state.selectedIngredients = [];
+      state.ingredients = [];
     },
-    moveUpSelectedIngredient: (
+    moveUpIngredient: (
       state,
       action: PayloadAction<TConstructorIngredient>
     ) => {
-      const index = state.selectedIngredients.findIndex(
+      const index = state.ingredients.findIndex(
         (item) => item.id === action.payload.id
       );
       if (index > 0) {
-        const temp = state.selectedIngredients[index - 1];
-        state.selectedIngredients[index - 1] = action.payload;
-        state.selectedIngredients[index] = temp;
+        const temp = state.ingredients[index - 1];
+        state.ingredients[index - 1] = action.payload;
+        state.ingredients[index] = temp;
       }
     },
-    moveDownSelectedIngredient: (
+    moveDownIngredient: (
       state,
       action: PayloadAction<TConstructorIngredient>
     ) => {
-      const index = state.selectedIngredients.findIndex(
+      const index = state.ingredients.findIndex(
         (item) => item.id === action.payload.id
       );
-      if (index < state.selectedIngredients.length - 1) {
-        const temp = state.selectedIngredients[index + 1];
-        state.selectedIngredients[index + 1] = action.payload;
-        state.selectedIngredients[index] = temp;
+      if (index < state.ingredients.length - 1) {
+        const temp = state.ingredients[index + 1];
+        state.ingredients[index + 1] = action.payload;
+        state.ingredients[index] = temp;
       }
     }
   }
@@ -84,12 +81,12 @@ const constructorSlice = createSlice({
 export const constructorReducer = constructorSlice.reducer;
 export const {
   addBun,
-  addSelectedIngredient,
-  removeSelectedIngredient,
+  addChoosingIngredient,
+  removeIngredient,
   resetConstructor,
-  moveUpSelectedIngredient,
-  moveDownSelectedIngredient
+  moveUpIngredient,
+  moveDownIngredient
 } = constructorSlice.actions;
 
-export const { selectSelectedIngredients, selectSelectedBun } =
+export const { selectChoosingIngredients, selectChoosingBun } =
   constructorSlice.selectors;

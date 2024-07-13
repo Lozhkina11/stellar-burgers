@@ -3,12 +3,12 @@ import { getOrderByNumberApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 
-type TInitialState = {
+type TBurgerState = {
   order: TOrder | null;
   isOrderLoading: boolean;
 };
 
-const initialState: TInitialState = {
+const initialState: TBurgerState = {
   order: null,
   isOrderLoading: false
 };

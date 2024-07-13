@@ -3,12 +3,12 @@ import { getOrdersApi } from '@api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 
-type TInitialState = {
+type TBurgerState = {
   orders: TOrder[];
   isHistoryLoading: boolean;
 };
 
-const initialState: TInitialState = {
+const initialState: TBurgerState = {
   isHistoryLoading: false,
   orders: []
 };

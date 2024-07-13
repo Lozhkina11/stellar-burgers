@@ -3,13 +3,13 @@ import { orderBurgerApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 
-type TInitialState = {
+type TBurgerState = {
   ingredients: string[];
   order: TOrder | null;
   isOrderBurgerLoading: boolean;
 };
 
-const initialState: TInitialState = {
+const initialState: TBurgerState = {
   ingredients: [], // @todo: переименовать
   order: null, // @todo: переименовать
   isOrderBurgerLoading: false // @todo: переименовать

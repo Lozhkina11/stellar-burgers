@@ -2,12 +2,12 @@ import { getIngredientsApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TIngredient } from '@utils-types';
 
-type TInitialState = {
+type TBurgerState = {
   ingredients: TIngredient[];
   isIngredientsLoading: boolean;
 };
 
-const initialState: TInitialState = {
+const initialState: TBurgerState = {
   ingredients: [],
   isIngredientsLoading: false
 };

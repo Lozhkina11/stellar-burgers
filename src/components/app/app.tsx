@@ -19,7 +19,7 @@ import { useEffect } from 'react';
 import { useDispatch } from '../../services/store';
 import { getIngredients } from '../../services/ingredients';
 
-import { checkAuth } from '../../services/user';
+import { checkLogin } from '../../services/user';
 import { ProtectedRoutes } from '../protected-route/protected-route';
 
 const App = () => {
@@ -33,7 +33,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getIngredients());
-    dispatch(checkAuth());
+    dispatch(checkLogin());
   }, []);
 
   return (
@@ -83,7 +83,6 @@ const App = () => {
           }
         />
         <Route
-          // index
           path='/profile'
           element={
             <ProtectedRoutes>
