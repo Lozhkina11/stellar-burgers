@@ -12,7 +12,6 @@ export const ConstructorPage: FC = () => {
   const isIngredientsLoading: Boolean = useSelector(
     (store) => store.ingredients.isIngredientsLoading
   );
-  // const isIngredientsLoading = false;
 
   return (
     <>

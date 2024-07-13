@@ -6,11 +6,7 @@ import { logout } from '../../services/user';
 
 export const ProfileMenu: FC = () => {
   const { pathname } = useLocation();
-
   const dispatch = useDispatch();
-
-  // const handleLogout = () => {}
-
   const handleLogout = () => {
     dispatch(logout()).then(() => <Navigate to={'/login'} />);
   };

@@ -3,9 +3,9 @@ import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import {
   resetOrder,
-  selectOrderBurgerIsLoading,
+  selectOrderIsLoading,
   selectOrderBurger,
-  sendOrderBurger
+  createOrderBurger
 } from '../../services/orderBurger';
 import { useDispatch, useSelector } from '../../services/store';
 import {
@@ -28,7 +28,7 @@ export const BurgerConstructor: FC = () => {
     bun: selectedBun,
     ingredients: selectedIngredients
   };
-  const orderRequest = useSelector(selectOrderBurgerIsLoading);
+  const orderRequest = useSelector(selectOrderIsLoading);
   const orderModalData = useSelector(selectOrderBurger);
   console.log({ orderModalData });
 
@@ -44,7 +44,7 @@ export const BurgerConstructor: FC = () => {
     );
 
     dispatch(
-      sendOrderBurger([...ingredientsIds, constructorItems.bun._id])
+      createOrderBurger([...ingredientsIds, constructorItems.bun._id])
     ).then(() => {
       dispatch(resetConstructor());
     });

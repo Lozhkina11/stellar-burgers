@@ -13,10 +13,7 @@ const initialState: TBurgerState = {
   isOrderLoading: false
 };
 
-export const getOrderByNumber = createAsyncThunk(
-  'order/getOrderByNumber',
-  getOrderByNumberApi
-);
+export const getOrder = createAsyncThunk('order/getOrder', getOrderByNumberApi);
 
 const order = createSlice({
   name: 'order',
@@ -28,14 +25,14 @@ const order = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getOrderByNumber.fulfilled, (state, action) => {
+      .addCase(getOrder.fulfilled, (state, action) => {
         state.order = action.payload.orders[0];
         state.isOrderLoading = false;
       })
-      .addCase(getOrderByNumber.rejected, (state, action) => {
+      .addCase(getOrder.rejected, (state, action) => {
         state.isOrderLoading = false;
       })
-      .addCase(getOrderByNumber.pending, (state, action) => {
+      .addCase(getOrder.pending, (state, action) => {
         state.isOrderLoading = true;
       });
   }

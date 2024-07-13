@@ -4,28 +4,17 @@ import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
 import { useParams } from 'react-router-dom';
-import { getOrderByNumber, selectOrder } from '../../services/order';
+import { getOrder, selectOrder } from '../../services/order';
 import { selectIngredients } from '../../services/ingredients';
 
 export const OrderInfo: FC = () => {
   /** TODO: взять переменные orderData и ingredients из стора */
-  // const orderData = {
-  //   createdAt: '',
-  //   ingredients: [],
-  //   _id: '',
-  //   status: '',
-  //   name: '',
-  //   updatedAt: 'string',
-  //   number: 0
-  // };
-
-  // const ingredients: TIngredient[] = [];
   const dispatch = useDispatch();
   const { number } = useParams();
 
   useEffect(() => {
     if (number) {
-      dispatch(getOrderByNumber(parseInt(number)));
+      dispatch(getOrder(parseInt(number)));
     }
   }, []);
 

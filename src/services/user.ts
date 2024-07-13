@@ -14,7 +14,7 @@ import { getCookie, setCookie, deleteCookie } from '../utils/cookie';
 
 export interface IUserState {
   isChecked: boolean;
-  isAuthenticated: boolean;
+  isLogin: boolean;
   user: TUser | null | undefined;
   isUserLoading: boolean;
   error: string | null | undefined;
@@ -22,7 +22,7 @@ export interface IUserState {
 
 const initialState: IUserState = {
   isChecked: false,
-  isAuthenticated: false,
+  isLogin: false,
   user: null,
   isUserLoading: false,
   error: null
@@ -79,7 +79,7 @@ export const userSlice = createSlice({
   },
   selectors: {
     selectIsChecked: (state) => state.isChecked,
-    selectIsAuthenticated: (state) => state.isAuthenticated,
+    selectIsLogin: (state) => state.isLogin,
     selectUser: (state) => state.user,
     selectUserLoading: (state) => state.isUserLoading,
     selectError: (state) => state.error
@@ -88,7 +88,7 @@ export const userSlice = createSlice({
     builder
       .addCase(getUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.isAuthenticated = true;
+        state.isLogin = true;
         state.isChecked = true;
         state.isUserLoading = false;
         state.error = null;
@@ -102,7 +102,7 @@ export const userSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.isAuthenticated = true;
+        state.isLogin = true;
         state.isChecked = true;
         state.isUserLoading = false;
       })
@@ -115,7 +115,7 @@ export const userSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.isAuthenticated = true;
+        state.isLogin = true;
         state.isChecked = true;
         state.isUserLoading = false;
         state.error = null;
@@ -129,7 +129,7 @@ export const userSlice = createSlice({
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.isAuthenticated = true;
+        state.isLogin = true;
         state.isChecked = true;
         state.isUserLoading = false;
       })
@@ -142,7 +142,7 @@ export const userSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.user = null;
-        state.isAuthenticated = false;
+        state.isLogin = false;
         state.isChecked = true;
         state.isUserLoading = false;
         state.error = null;
@@ -156,7 +156,7 @@ export const userReducer = userSlice.reducer;
 export const { checkIsAuth, clearError } = userSlice.actions;
 export const {
   selectIsChecked,
-  selectIsAuthenticated,
+  selectIsLogin,
   selectUser,
   selectUserLoading,
   selectError

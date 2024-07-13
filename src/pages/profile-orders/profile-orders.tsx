@@ -11,7 +11,6 @@ import {
 
 export const ProfileOrders: FC = () => {
   /** TODO: взять переменную из стора */
-  // const orders: TOrder[] = [];
   const dispatch = useDispatch();
 
   useEffect(() => {

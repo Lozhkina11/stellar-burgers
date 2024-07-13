@@ -19,15 +19,8 @@ const getAllIngredients = (
 
 export const BurgerIngredients: FC = () => {
   /** TODO: взять переменные из стора */
-  // const buns = [];
-  // const mains = [];
-  // const sauces = [];
-  // const [activeIngredientIdOld, setActiveIngredientId] = useState<string>('');
-
-  // const { id: activeIngredientId = '' } = useParams();
 
   const ingredients: TIngredient[] = useSelector(selectIngredients);
-
   const buns: TIngredient[] = getAllIngredients(ingredients, 'bun');
   const mains: TIngredient[] = getAllIngredients(ingredients, 'main');
   const sauces: TIngredient[] = getAllIngredients(ingredients, 'sauce');

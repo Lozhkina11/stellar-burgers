@@ -1,7 +1,7 @@
 import { Preloader } from '@ui';
 import { Navigate } from 'react-router';
 import { useSelector } from '../../services/store';
-import { selectIsChecked, selectIsAuthenticated } from '../../services/user';
+import { selectIsChecked, selectIsLogin } from '../../services/user';
 import { useLocation } from 'react-router-dom';
 
 type TProtectedRoutesProps = {
@@ -10,7 +10,7 @@ type TProtectedRoutesProps = {
 };
 
 export const ProtectedRoutes = ({ children, guest }: TProtectedRoutesProps) => {
-  const isUserAuth = useSelector(selectIsAuthenticated);
+  const isUserLogin = useSelector(selectIsLogin);
   const isAuthChecked = useSelector(selectIsChecked);
   const location = useLocation();
 
@@ -18,13 +18,12 @@ export const ProtectedRoutes = ({ children, guest }: TProtectedRoutesProps) => {
     return <Preloader />;
   }
 
-  if (!guest && !isUserAuth) {
+  if (!guest && !isUserLogin) {
     return <Navigate to={'/login'} replace state={{ from: location }} />;
   }
 
-  if (guest && isUserAuth) {
+  if (guest && isUserLogin) {
     console.log(location.state?.from);
-    // return <Navigate to={`${location.state?.from || '/'}`} />;
     return <Navigate to={'/'} />;
   }
 

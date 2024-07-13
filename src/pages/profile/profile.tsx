@@ -7,11 +7,6 @@ import { selectUser, updateUser } from '../../services/user';
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
 
-  // const user = {
-  //   name: '',
-  //   email: ''
-  // };
-
   const dispatch = useDispatch();
 
   const user = useSelector(selectUser) as TUser;

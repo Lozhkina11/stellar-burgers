@@ -10,13 +10,12 @@ type TBurgerState = {
 };
 
 const initialState: TBurgerState = {
-  ingredients: [], // @todo: переименовать
-  order: null, // @todo: переименовать
-  isOrderBurgerLoading: false // @todo: переименовать
+  ingredients: [],
+  order: null,
+  isOrderBurgerLoading: false
 };
 
-export const sendOrderBurger = createAsyncThunk(
-  // @todo: sendOrderBurger переименовать
+export const createOrderBurger = createAsyncThunk(
   'orders/orderBurger',
   orderBurgerApi
 );
@@ -34,20 +33,20 @@ const orderBurger = createSlice({
   },
   selectors: {
     selectOrderBurger: (state) => state.order,
-    selectOrderBurgerIngredients: (state) => state.ingredients,
-    selectOrderBurgerIsLoading: (state) => state.isOrderBurgerLoading
+    selectOrderIngredients: (state) => state.ingredients,
+    selectOrderIsLoading: (state) => state.isOrderBurgerLoading
   },
   extraReducers: (builder) => {
     builder
-      .addCase(sendOrderBurger.fulfilled, (state, action) => {
+      .addCase(createOrderBurger.fulfilled, (state, action) => {
         state.order = action.payload.order;
         state.ingredients = action.payload.order.ingredients;
         state.isOrderBurgerLoading = false;
       })
-      .addCase(sendOrderBurger.rejected, (state, action) => {
+      .addCase(createOrderBurger.rejected, (state, action) => {
         state.isOrderBurgerLoading = false;
       })
-      .addCase(sendOrderBurger.pending, (state, action) => {
+      .addCase(createOrderBurger.pending, (state, action) => {
         state.isOrderBurgerLoading = true;
       });
   }
@@ -55,8 +54,8 @@ const orderBurger = createSlice({
 
 export const orderBurgerReducer = orderBurger.reducer;
 export const {
-  selectOrderBurgerIsLoading,
-  selectOrderBurgerIngredients,
+  selectOrderIsLoading,
+  selectOrderIngredients,
   selectOrderBurger
 } = orderBurger.selectors;
 export const { resetOrder, resetIngredients } = orderBurger.actions;
