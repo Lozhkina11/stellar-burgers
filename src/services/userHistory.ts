@@ -1,4 +1,4 @@
-import { getOrdersApi } from '@api';
+import { getOrdersApi } from '../utils/burger-api';
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
@@ -8,7 +8,7 @@ type TBurgerState = {
   isHistoryLoading: boolean;
 };
 
-const initialState: TBurgerState = {
+export const initialStateHistory: TBurgerState = {
   isHistoryLoading: false,
   orders: []
 };
@@ -20,7 +20,7 @@ export const getUserOrders = createAsyncThunk(
 
 const userOrderSlice = createSlice({
   name: 'userHistory',
-  initialState: initialState,
+  initialState: initialStateHistory,
   reducers: {},
   selectors: {
     selectUserOrders: (state) => state.orders,
