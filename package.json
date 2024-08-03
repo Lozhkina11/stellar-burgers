@@ -99,5 +99,8 @@
     "extends": [
       "plugin:storybook/recommended"
     ]
-  }
+  },
+    "jest": {
+      "testEnvironment": "jsdom"
+    }
 }
