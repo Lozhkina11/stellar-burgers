@@ -180,14 +180,19 @@ describe('Test user slice', () => {
     });
   });
 
-  it('test logout', () => {
-    const state = userReducer(initialStateUser, {
-      type: logout.fulfilled.type
-    });
-    expect(state).toEqual({
-      ...initialStateUser,
-      isChecked: true,
-      isUserLoading: false
+  describe('User slice', () => {
+    it('test logout', () => {
+      // Вызываем редьюсер
+      const state = userReducer(initialStateUser, {
+        type: logout.fulfilled.type,
+      });
+      const newState = userReducer(state, checkIsAuth());
+      //состояние соответс ожидаемому
+      expect(state).toEqual({
+        ...initialStateUser,
+        isChecked: true,
+        isUserLoading: false,
+      });
     });
   });
 
