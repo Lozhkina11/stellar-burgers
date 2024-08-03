@@ -47,8 +47,9 @@ describe('Test user slice', () => {
     });
     expect(state).toEqual({
       ...initialStateUser,
-      isUserLoading: true,
+      isUserLoading: false,
       isChecked: true,
+      isLogin: true,
       user: userInfo
     });
   });
@@ -86,8 +87,9 @@ describe('Test user slice', () => {
 
     expect(state).toEqual({
       ...initialStateUser,
-      isUserLoading: true,
+      isUserLoading: false,
       isChecked: true,
+      isLogin: true,
       user: userInfo
     });
   });
@@ -118,8 +120,9 @@ describe('Test user slice', () => {
     });
     expect(state).toEqual({
       ...initialStateUser,
-      isUserLoading: true,
+      isUserLoading: false, //изменила
       isChecked: true,
+      isLogin: true,
       user: userInfo
     });
   });
@@ -151,8 +154,9 @@ describe('Test user slice', () => {
 
     expect(state).toEqual({
       ...initialStateUser,
-      isUserLoading: true,
+      isUserLoading: false,
       isChecked: true,
+      isLogin: true, //добавила
       user: userInfo
     });
   });

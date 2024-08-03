@@ -55,9 +55,7 @@ describe('Test constructor slice', () => {
 
     expect(newState).toEqual({
       bun: null,
-      selectChoosingIngredients: [
-        { ...ingredient, id: newState.ingredients[0].id }
-      ]
+      ingredients: [{ ...ingredient, id: newState.ingredients[0].id }]
     });
   });
 
@@ -118,6 +116,6 @@ describe('Test constructor slice', () => {
       initialStateIngredientsConstructor,
       resetConstructor()
     );
-    expect(newState).toEqual({ bun, ingredients: [] });
+    expect(newState).toEqual({ bun: null, ingredients: [] }); // Исправлено значение bun на null
   });
 });
