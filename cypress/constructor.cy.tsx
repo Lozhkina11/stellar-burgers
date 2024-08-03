@@ -66,15 +66,15 @@ const orderResponse = {
     ],
     _id: '66953696119d45001b4f90d8',
     owner: {
-      name: 'test',
-      email: 'test@test.ru',
-      createdAt: '2024-07-08T18:26:35.819Z',
-      updatedAt: '2024-07-08T20:11:22.933Z'
+      name: 'Юлиана',
+      email: 'lozhkina_2021@list.ru',
+      createdAt: '2024-08-03T18:26:35.819Z',
+      updatedAt: '2024-08-03T20:11:22.933Z'
     },
     status: 'done',
     name: 'Краторный space минеральный люминесцентный бургер',
-    createdAt: '2024-07-15T14:47:50.047Z',
-    updatedAt: '2024-07-15T14:47:50.445Z',
+    createdAt: '2024-08-03T14:47:50.047Z',
+    updatedAt: '2024-08-03T14:47:50.445Z',
     number: 45888,
     price: 2623
   }

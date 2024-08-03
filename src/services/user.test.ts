@@ -12,8 +12,8 @@ import {
 } from './user';
 
 const userInfo = {
-  email: 'test@test.ru',
-  name: 'rest'
+  email: 'lozhkina_2021@list.ru',
+  name: 'Юлиана'
 };
 
 const userLoginData = { user: { ...userInfo } };
