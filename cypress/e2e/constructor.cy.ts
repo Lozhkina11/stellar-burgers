@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+
 const mainOneId = '643d69a5c3f7b9001cfa0941';
 const mainTwoId = '643d69a5c3f7b9001cfa0946';
 const bunId = '643d69a5c3f7b9001cfa093c';
@@ -120,10 +121,10 @@ describe('Constructor page', () => {
     //     cy.log('Element not found');
     //   }
     // });
-    cy.get(`[data-cy=ingredient-${mainOneId}]`).as('mainOne');
-    cy.get(`[data-cy=ingredient-${mainTwoId}]`).as('mainTwo');
-    cy.get(`[data-cy=ingredient-${bunId}]`).as('bun');
-    cy.get(`[data-cy=ingredient-${sauceId}]`).as('sauce');
+    cy.get(`[data-cy=${mainOneId}]`).as('mainOne');
+    cy.get(`[data-cy=${mainTwoId}]`).as('mainTwo');
+    cy.get(`[data-cy=${bunId}]`).as('bun');
+    cy.get(`[data-cy=${sauceId}]`).as('sauce');
     cy.get('@bun').find('button').as('bunBtn');
     cy.get('@mainOne').find('button').as('mainOneBtn');
     cy.get('@mainTwo').find('button').as('mainTwoBtn');
@@ -139,7 +140,10 @@ describe('Constructor page', () => {
     it('Get ingredients request with success response', () => {
       cy.get('@bun').should('contain', 'Краторная булка N-200i');
 
-      cy.get('@mainOne').should('contain', 'Биокотлета из марсианской Магнолии');
+      cy.get('@mainOne').should(
+        'contain',
+        'Биокотлета из марсианской Магнолии'
+      );
 
       cy.get('@mainTwo').should(
         'contain',
@@ -223,3 +227,34 @@ describe('Constructor page', () => {
     });
   });
 });
+
+// describe('Constructor page', () => {
+//   beforeEach(() => {
+//     // Перехватываем запрос на правильный эндпоинт и возвращаем моковые данные из fixtures
+//     cy.intercept(
+//       'GET',
+//       'https://norma.nomoreparties.space/api/ingredients',
+//       (req) => {
+//         req.reply((res) => {
+//           res.send({ fixture: 'ingredients.json' });
+//         });
+//       }
+//     ).as('getIngredients');
+//   });
+
+//   it('должен отображать моковые данные на странице', function () {
+//     // Переходим на страницу конструктора
+//     cy.visit('http://localhost:4000');
+
+//     // Проверяем, что элементы с моковыми данными отображаются на странице
+//     cy.fixture('ingredients.json').then((ingredients) => {
+//       // Выводим данные в лог для проверки
+//       cy.log(JSON.stringify(ingredients.data));
+
+//       // Проверяем каждый элемент массива
+//       ingredients.data.forEach((ingredient) => {
+//         cy.contains(ingredient.name).should('be.visible');
+//       });
+//     });
+//   });
+// });
