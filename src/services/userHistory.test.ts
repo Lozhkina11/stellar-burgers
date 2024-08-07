@@ -4,7 +4,6 @@ import {
   initialStateHistory
 } from './userHistory';
 
-
 const orders = [
   {
     _id: '6691032b119d45001b4f8481',

@@ -1,27 +1,14 @@
-
+/// <reference types="cypress" />
+const mainOneId = '643d69a5c3f7b9001cfa0941';
+const mainTwoId = '643d69a5c3f7b9001cfa0946';
 const bunId = '643d69a5c3f7b9001cfa093c';
-const main1Id = '643d69a5c3f7b9001cfa0941';
-const main2Id = '643d69a5c3f7b9001cfa093e';
 const sauceId = '643d69a5c3f7b9001cfa0942';
 
 const orderResponse = {
   success: true,
-  name: 'Краторный space минеральный люминесцентный бургер',
+  name: 'Краторный spicy био-марсианский минеральный бургер',
   order: {
     ingredients: [
-      {
-        _id: '643d69a5c3f7b9001cfa093c',
-        name: 'Краторная булка N-200i',
-        type: 'bun',
-        proteins: 80,
-        fat: 24,
-        carbohydrates: 53,
-        calories: 420,
-        price: 1255,
-        image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-        image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-        image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png'
-      },
       {
         _id: '643d69a5c3f7b9001cfa0941',
         name: 'Биокотлета из марсианской Магнолии',
@@ -34,21 +21,24 @@ const orderResponse = {
         image: 'https://code.s3.yandex.net/react/code/meat-01.png',
         image_mobile:
           'https://code.s3.yandex.net/react/code/meat-01-mobile.png',
-        image_large: 'https://code.s3.yandex.net/react/code/meat-01-large.png'
+        image_large: 'https://code.s3.yandex.net/react/code/meat-01-large.png',
+        __v: 0
       },
       {
-        _id: '643d69a5c3f7b9001cfa093e',
-        name: 'Филе Люминесцентного тетраодонтимформа',
+        _id: '643d69a5c3f7b9001cfa0946',
+        name: 'Хрустящие минеральные кольца',
         type: 'main',
-        proteins: 44,
-        fat: 26,
-        carbohydrates: 85,
-        calories: 643,
-        price: 988,
-        image: 'https://code.s3.yandex.net/react/code/meat-03.png',
+        proteins: 808,
+        fat: 689,
+        carbohydrates: 609,
+        calories: 986,
+        price: 300,
+        image: 'https://code.s3.yandex.net/react/code/mineral_rings.png',
         image_mobile:
-          'https://code.s3.yandex.net/react/code/meat-03-mobile.png',
-        image_large: 'https://code.s3.yandex.net/react/code/meat-03-large.png'
+          'https://code.s3.yandex.net/react/code/mineral_rings-mobile.png',
+        image_large:
+          'https://code.s3.yandex.net/react/code/mineral_rings-large.png',
+        __v: 0
       },
       {
         _id: '643d69a5c3f7b9001cfa0942',
@@ -62,22 +52,37 @@ const orderResponse = {
         image: 'https://code.s3.yandex.net/react/code/sauce-02.png',
         image_mobile:
           'https://code.s3.yandex.net/react/code/sauce-02-mobile.png',
-        image_large: 'https://code.s3.yandex.net/react/code/sauce-02-large.png'
+        image_large: 'https://code.s3.yandex.net/react/code/sauce-02-large.png',
+        __v: 0
+      },
+      {
+        _id: '643d69a5c3f7b9001cfa093c',
+        name: 'Краторная булка N-200i',
+        type: 'bun',
+        proteins: 80,
+        fat: 24,
+        carbohydrates: 53,
+        calories: 420,
+        price: 1255,
+        image: 'https://code.s3.yandex.net/react/code/bun-02.png',
+        image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
+        image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
+        __v: 0
       }
     ],
-    _id: '66953696119d45001b4f90d8',
+    _id: '66b1e2e1119d45001b4fdd7e',
     owner: {
       name: 'Юлиана',
       email: 'lozhkina_2021@list.ru',
-      createdAt: '2024-08-03T18:26:35.819Z',
-      updatedAt: '2024-08-03T20:11:22.933Z'
+      createdAt: '2024-07-11T10:10:29.765Z',
+      updatedAt: '2024-07-12T17:35:42.095Z'
     },
     status: 'done',
-    name: 'Краторный space минеральный люминесцентный бургер',
-    createdAt: '2024-08-03T14:47:50.047Z',
-    updatedAt: '2024-08-03T14:47:50.445Z',
-    number: 45888,
-    price: 2623
+    name: 'Краторный spicy био-марсианский минеральный бургер',
+    createdAt: '2024-08-06T08:46:25.020Z',
+    updatedAt: '2024-08-06T08:46:25.493Z',
+    number: 48586,
+    price: 2069
   }
 };
 
@@ -99,21 +104,29 @@ describe('Constructor page', () => {
 
     cy.setCookie(
       'accessToken',
-      `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGMyZjViMTE5ZDQ1MDAxYjRmNTVkMSIsImlhdCI6MTcyMTA1NTI3MywiZXhwIjoxNzIxMDU2NDczfQ.YAP0MVANkX9bGQVV-Ndkjge0BEZGMgla1rwt7Si4Qo8`
+      `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGZhZjk1MTE5ZDQ1MDAxYjRmODA1MSIsImlhdCI6MTcyMjcwMDA5NywiZXhwIjoxNzIyNzAxMjk3fQ.Logf0eouXJVYuumZEH-tT7qzcqmdhls1tb5WUrd1WkM`
     );
     window.localStorage.setItem(
       'refreshToken',
-      '7848c013ef99b90baf09172d3ff23962362a2457a1c290a5e508c04b968fc6c133a5573b91dd38f7'
+      '2a51568ec61bbb7a77fea6f9bf1b3bb6c91121112775481d493eedac986746ee86331c261e901cc1'
     );
 
     cy.visit('/');
+
+    // cy.get('body').then(($body) => {
+    //   if ($body.find(`[data-cy=ingredient-${bunId}]`).length) {
+    //     cy.log('Element found');
+    //   } else {
+    //     cy.log('Element not found');
+    //   }
+    // });
+    cy.get(`[data-cy=ingredient-${mainOneId}]`).as('mainOne');
+    cy.get(`[data-cy=ingredient-${mainTwoId}]`).as('mainTwo');
     cy.get(`[data-cy=ingredient-${bunId}]`).as('bun');
-    cy.get(`[data-cy=ingredient-${main1Id}]`).as('main1');
-    cy.get(`[data-cy=ingredient-${main2Id}]`).as('main2');
     cy.get(`[data-cy=ingredient-${sauceId}]`).as('sauce');
     cy.get('@bun').find('button').as('bunBtn');
-    cy.get('@main1').find('button').as('main1Btn');
-    cy.get('@main2').find('button').as('main2Btn');
+    cy.get('@mainOne').find('button').as('mainOneBtn');
+    cy.get('@mainTwo').find('button').as('mainTwoBtn');
     cy.get('@sauce').find('button').as('sauceBtn');
   });
 
@@ -126,9 +139,9 @@ describe('Constructor page', () => {
     it('Get ingredients request with success response', () => {
       cy.get('@bun').should('contain', 'Краторная булка N-200i');
 
-      cy.get('@main1').should('contain', 'Биокотлета из марсианской Магнолии');
+      cy.get('@mainOne').should('contain', 'Биокотлета из марсианской Магнолии');
 
-      cy.get('@main2').should(
+      cy.get('@mainTwo').should(
         'contain',
         'Филе Люминесцентного тетраодонтимформа'
       );
@@ -140,17 +153,17 @@ describe('Constructor page', () => {
   describe('Test adding ingredient', () => {
     it('Add ingredients to constructor by click add button on it', () => {
       cy.get('@bunBtn').click();
-      cy.get('@main1Btn').click();
-      cy.get('@main2Btn').click();
+      cy.get('@mainOneBtn').click();
+      cy.get('@mainTwoBtn').click();
       cy.get('@sauceBtn').click();
 
       cy.get(`[data-cy="bun-top-place-${bunId}"]`).should('exist');
 
       cy.get(`[data-cy="bun-bottom-place-${bunId}"]`).should('exist');
 
-      cy.get(`[data-cy="ingredient-place-${main1Id}"]`).should('exist');
+      cy.get(`[data-cy="ingredient-place-${mainOneId}"]`).should('exist');
 
-      cy.get(`[data-cy="ingredient-place-${main2Id}"]`).should('exist');
+      cy.get(`[data-cy="ingredient-place-${mainTwoId}"]`).should('exist');
 
       cy.get(`[data-cy="ingredient-place-${sauceId}"]`).should('exist');
     });
@@ -180,8 +193,8 @@ describe('Constructor page', () => {
   describe('Test order', () => {
     it('Make order', () => {
       cy.get('@bunBtn').click();
-      cy.get('@main1Btn').click();
-      cy.get('@main2Btn').click();
+      cy.get('@mainOneBtn').click();
+      cy.get('@mainTwoBtn').click();
       cy.get('@sauceBtn').click();
 
       cy.get('[data-cy="order-button"]').click();
