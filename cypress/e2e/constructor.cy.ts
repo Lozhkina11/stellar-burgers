@@ -121,10 +121,10 @@ describe('Constructor page', () => {
     //     cy.log('Element not found');
     //   }
     // });
-    cy.get(`[data-cy=${mainOneId}]`).as('mainOne');
-    cy.get(`[data-cy=${mainTwoId}]`).as('mainTwo');
-    cy.get(`[data-cy=${bunId}]`).as('bun');
-    cy.get(`[data-cy=${sauceId}]`).as('sauce');
+    cy.get(`[data-cy=ingredient-${mainOneId}]`).as('mainOne');
+    cy.get(`[data-cy=ingredient-${mainTwoId}]`).as('mainTwo');
+    cy.get(`[data-cy=ingredient-${bunId}]`).as('bun');
+    cy.get(`[data-cy=ingredient-${sauceId}]`).as('sauce');
     cy.get('@bun').find('button').as('bunBtn');
     cy.get('@mainOne').find('button').as('mainOneBtn');
     cy.get('@mainTwo').find('button').as('mainTwoBtn');
@@ -145,10 +145,7 @@ describe('Constructor page', () => {
         'Биокотлета из марсианской Магнолии'
       );
 
-      cy.get('@mainTwo').should(
-        'contain',
-        'Филе Люминесцентного тетраодонтимформа'
-      );
+      cy.get('@mainTwo').should('contain', 'Хрустящие минеральные кольца');
 
       cy.get('@sauce').should('contain', 'Соус Spicy-X');
     });
@@ -174,7 +171,7 @@ describe('Constructor page', () => {
   });
 
   describe('Test ingredient in modal', () => {
-    it('Open ingredient in modal by click on it', () => {
+    it('Open ingredient in modal', () => {
       cy.get('@bun').click();
       cy.location('pathname').should('eq', `/ingredients/${bunId}`);
       cy.get(`[data-cy="ingredient-details-${bunId}"]`).as(
@@ -194,8 +191,30 @@ describe('Constructor page', () => {
     });
   });
 
-  describe('Test order', () => {
-    it('Make order', () => {
+  describe('Create order', () => {
+    beforeEach(() => {
+      cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
+      cy.intercept('GET', 'api/auth/user', { fixture: 'user.json' });
+      cy.intercept('POST', 'api/orders', { fixture: 'order.json' }).as(
+        'createOrder'
+      );
+
+      cy.visit('/');
+      window.localStorage.setItem('refreshToken', 'refreshToken');
+      cy.setCookie('accessToken', 'accessToken');
+
+      // Алиасы для кнопок, которые уже определены в основном beforeEach
+      cy.get(`[data-cy=ingredient-${bunId}]`).find('button').as('bunBtn');
+      cy.get(`[data-cy=ingredient-${mainOneId}]`)
+        .find('button')
+        .as('mainOneBtn');
+      cy.get(`[data-cy=ingredient-${mainTwoId}]`)
+        .find('button')
+        .as('mainTwoBtn');
+      cy.get(`[data-cy=ingredient-${sauceId}]`).find('button').as('sauceBtn');
+    });
+
+    it('Test create order', () => {
       cy.get('@bunBtn').click();
       cy.get('@mainOneBtn').click();
       cy.get('@mainTwoBtn').click();
@@ -203,19 +222,22 @@ describe('Constructor page', () => {
 
       cy.get('[data-cy="order-button"]').click();
 
-      cy.get('@createOrder')
-        .wait('@createOrder')
-        .then((intercept) => {
-          expect(intercept.response?.statusCode).to.eq(200);
-          expect(intercept.response?.body).to.deep.eq(orderResponse);
-        });
+      // Ждем, когда запрос завершится
+      cy.wait('@createOrder').then((intercept) => {
+        expect(intercept.response?.statusCode).to.eq(200);
+        expect(intercept.response?.body).to.deep.eq(orderResponse);
+      });
 
-      cy.get('[data-cy="modal-order-title"]').should('contain', '45888');
+      // Проверяем, что модальное окно отображает правильный номер заказа
+      cy.get('[data-cy="modal-order-title"]').should('contain', '48586');
 
+      // Закрываем модальное окно
       cy.get('[data-cy="modal-close"]').click();
 
+      // Проверяем, что модальное окно закрылось
       cy.get('[data-cy="modal-overlay"]').should('not.exist');
 
+      // Проверяем состояние конструктора после оформления заказа
       cy.get('[data-cy="burger-constructor"]')
         .find('div')
         .should('contain', 'Выберите булки');
@@ -227,7 +249,6 @@ describe('Constructor page', () => {
     });
   });
 });
-
 // describe('Constructor page', () => {
 //   beforeEach(() => {
 //     // Перехватываем запрос на правильный эндпоинт и возвращаем моковые данные из fixtures
@@ -258,3 +279,5 @@ describe('Constructor page', () => {
 //     });
 //   });
 // });
+
+//////////////

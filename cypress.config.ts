@@ -9,7 +9,7 @@ export default defineConfig({
   },
 
   e2e: {
-    baseUrl: 'http://localhost:4000',
+    baseUrl: process.env.BASE_URL || 'http://localhost:4000',
     setupNodeEvents(on, config) {}
   }
 });
