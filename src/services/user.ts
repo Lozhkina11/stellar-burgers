@@ -6,7 +6,7 @@ import {
   getUserApi,
   updateUserApi,
   logoutApi
-} from '@api';
+} from '../utils/burger-api';
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
@@ -20,7 +20,7 @@ export interface IUserState {
   error: string | null | undefined;
 }
 
-const initialState: IUserState = {
+export const initialStateUser: IUserState = {
   isChecked: false,
   isLogin: false,
   user: null,
@@ -68,7 +68,7 @@ export const checkLogin = createAsyncThunk(
 
 export const userSlice = createSlice({
   name: 'user',
-  initialState: initialState,
+  initialState: initialStateUser,
   reducers: {
     checkIsAuth: (state) => {
       state.isChecked = true;

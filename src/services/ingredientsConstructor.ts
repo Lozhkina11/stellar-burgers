@@ -6,14 +6,14 @@ type TBurgerState = {
   ingredients: TConstructorIngredient[];
 };
 
-const initialState: TBurgerState = {
+export const initialStateIngredientsConstructor: TBurgerState = {
   bun: null,
   ingredients: []
 };
 
 const constructorSlice = createSlice({
   name: 'ingredientsConstructor',
-  initialState: initialState,
+  initialState: initialStateIngredientsConstructor,
   selectors: {
     selectChoosingIngredients: (state) => state.ingredients,
     selectChoosingBun: (state) => state.bun

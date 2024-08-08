@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGZhZjk1MTE5ZDQ1MDAxYjRmODA1MSIsImlhdCI6MTcyMjcwMDA5NywiZXhwIjoxNzIyNzAxMjk3fQ.Logf0eouXJVYuumZEH-tT7qzcqmdhls1tb5WUrd1WkM",
+  "refreshToken": "2a51568ec61bbb7a77fea6f9bf1b3bb6c91121112775481d493eedac986746ee86331c261e901cc1",
+  "user": {
+    "email": "lozhkina_2021@list.ru",
+    "name": "Юлиана"
+  }
+}

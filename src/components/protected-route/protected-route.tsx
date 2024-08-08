@@ -11,10 +11,10 @@ type TProtectedRoutesProps = {
 
 export const ProtectedRoutes = ({ children, guest }: TProtectedRoutesProps) => {
   const isUserLogin = useSelector(selectIsLogin);
-  const isAuthChecked = useSelector(selectIsChecked);
+  const isChecked = useSelector(selectIsChecked);
   const location = useLocation();
 
-  if (!isAuthChecked) {
+  if (!isChecked) {
     return <Preloader />;
   }
 
